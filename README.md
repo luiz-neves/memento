@@ -1,0 +1,1 @@
+![Build](https://github.com/IsabelleNP/memento/workflows/Build/badge.svg)
