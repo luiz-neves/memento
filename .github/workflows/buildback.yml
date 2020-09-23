@@ -1,4 +1,4 @@
-name: Build
+name: BuildBack
 
 on:
   pull_request:
@@ -13,4 +13,4 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
       - name: check
-        run: ./gradlew check
+        run: ./Backend/gradlew check

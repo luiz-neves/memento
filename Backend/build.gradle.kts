@@ -35,6 +35,6 @@ application {
     mainClassName = "ServerKt"
 }
 
-tasks.withType<Test>() {
+tasks.withType<Test> {
     useJUnitPlatform()
 }
