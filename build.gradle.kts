@@ -28,9 +28,13 @@ dependencies {
     // Mockk
     testImplementation("io.mockk:mockk:1.10.0")
 }
-tasks.withType<KotlinCompile>() {
+tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "1.8"
 }
 application {
     mainClassName = "ServerKt"
+}
+
+tasks.withType<Test>() {
+    useJUnitPlatform()
 }
