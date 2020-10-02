@@ -22,7 +22,7 @@
           </v-list-item-action>
 
           <v-list-item-content>
-            <v-list-item-title>Contact</v-list-item-title>
+            <v-list-item-title>Contatos</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -52,11 +52,11 @@
         <v-container fluid>
           <v-row justify="space-around">
             <v-col cols="6">
-              <v-img src="https://picsum.photos/510/300?random" aspect-ratio="1.7" max-height="300px"></v-img>
+              <v-img src="https://observatoriodocinema.uol.com.br/wp-content/uploads/2020/08/chadwick-boseman-1.jpg" aspect-ratio="1.7" max-height="300px"></v-img>
             </v-col>
             <v-col cols="6">
               <div class="title mb-1">{{ name }}</div>
-              <div class="subheading">Pai, irmão e amigo</div>
+              <div class="subheading">Companheiro, irmão e amigo</div>
               <div class="subheading">
                 <v-icon>mdi-star</v-icon>
                 {{ birthDate }}
@@ -66,7 +66,7 @@
                 {{ deathDate }}
               </div>
               <div class="text" justify-center>
-                {{ description }} Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                {{ description }}
               </div>
             </v-col>
           </v-row>
@@ -154,19 +154,19 @@
             <v-col cols="4">
               <div v-if="tribute.attachmentUrl">
                 <v-img :src="tribute.attachmentUrl" aspect-ratio="1.7"></v-img>
-                <div class="title mb-2 text-center">{{ tribute.name }}</div>
+                <div class="title mb-2 text-center">{{ tribute.description }}</div>
               </div>
             </v-col>
             <v-col cols="4">
               <div>
-                <v-img src="https://picsum.photos/510/302?random" aspect-ratio="1.7"></v-img>
-                <div class="title mb-2 text-center">Nome de um parente</div>
+                <v-img src="https://portalgiro.com/wp-content/uploads/2020/08/chadwick-boseman.jpg" aspect-ratio="1.7"></v-img>
+                <div class="title mb-2 text-center">Chadwick fazendo o que mais gostava</div>
               </div>
             </v-col>
             <v-col cols="4">
               <div>
-                <v-img src="https://picsum.photos/510/303?random" aspect-ratio="1.7"></v-img>
-                <div class="title mb-2 text-center">Nome de um parente</div>
+                <v-img src="https://jpimg.com.br/uploads/2020/08/chadwick-boseman.jpg" aspect-ratio="1.7"></v-img>
+                <div class="title mb-2 text-center">Seu talento era reconhecido por todos, recebendo vários prêmios</div>
               </div>
             </v-col>
           </v-row>
