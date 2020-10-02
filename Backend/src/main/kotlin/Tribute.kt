@@ -24,18 +24,15 @@ class TributeController {
     lateinit var tributeRepository: TributeRepository
 
     @GetMapping("/tribute")
-    fun getTributeByPersonId(@RequestParam("personId") personId: Int): ResponseEntity<TributeEntity> {
-        val tribute = tributeRepository.findByPersonId(personId)
+    fun getTributeByPersonId(@RequestParam("personId") personId: Int): ResponseEntity<List<TributeEntity>> {
+        val tributes = tributeRepository.findByPersonId(personId)
 
-        if (!tribute.isPresent) {
-            return ResponseEntity.notFound().build()
-        }
-
-        return ResponseEntity(tribute.get(), HttpStatus.OK)
+        return ResponseEntity(tributes, HttpStatus.OK)
     }
 
     @PostMapping("/tribute")
     fun saveTribute(@RequestBody @Valid tribute: TributeEntity): ResponseEntity<TributeEntity> {
+        tribute.id = null
         tributeRepository.save(tribute)
 
         return ResponseEntity(HttpStatus.OK)
@@ -43,7 +40,7 @@ class TributeController {
 }
 
 interface TributeRepository : JpaRepository<TributeEntity, Int> {
-    fun findByPersonId(personId: Int): Optional<TributeEntity>
+    fun findByPersonId(personId: Int): List<TributeEntity>
 }
 
 @Entity
@@ -52,7 +49,7 @@ data class TributeEntity(
     @GeneratedValue(strategy = GenerationType.AUTO)
     var id: Int? = null,
 
-    @Column(unique = true)
+    @Column
     @NotNull
     var personId: Int? = null,
 
