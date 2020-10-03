@@ -5,8 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
-import org.springframework.web.bind.annotation.PathVariable
 import javax.persistence.Id
 import javax.persistence.Entity
 import javax.persistence.Column
@@ -15,41 +16,37 @@ import javax.persistence.GenerationType
 import javax.validation.constraints.NotNull
 
 @RestController
-class PersonController {
+class Phone {
+
     @Autowired
-    lateinit var personRepository: PersonRepository
+    lateinit var phoneRepository: PhoneRepository
 
-    @GetMapping("/person/{id}")
-    fun getByPersonId(@PathVariable id: Int): ResponseEntity<PersonEntity> {
-        val person = personRepository.findById(id)
+    @PostMapping("/insertPhone")
+    fun postInsertPhone(@RequestBody phoneEntity: PhoneEntity): ResponseEntity<PhoneEntity> {
 
-        if (!person.isPresent) {
-            return ResponseEntity.notFound().build()
-        }
+        phoneRepository.save(phoneEntity)
 
-        return ResponseEntity(person.get(), HttpStatus.OK)
+        return ResponseEntity(HttpStatus.OK)
+    }
+
+    @GetMapping("/findAllPhones")
+    fun findAll(): ResponseEntity<MutableList<PhoneEntity>> {
+        val person = phoneRepository.findAll()
+        return ResponseEntity(person, HttpStatus.OK)
     }
 }
 
-interface PersonRepository : JpaRepository<PersonEntity, Int>
+interface PhoneRepository : JpaRepository<PhoneEntity, Int>
 
 @Entity
-data class PersonEntity(
+data class PhoneEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     var id: Int? = null,
 
     @Column(unique = true)
     @NotNull
-    var birthDate: String? = null,
-
-    @Column
-    @NotNull
-    var deathDate: String? = null,
-
-    @Column
-    @NotNull
-    var description: String? = null,
+    var phone: String? = null,
 
     @Column
     @NotNull
