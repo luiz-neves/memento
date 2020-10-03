@@ -8,7 +8,11 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
-import javax.persistence.*
+import javax.persistence.Id
+import javax.persistence.Entity
+import javax.persistence.Column
+import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
 import javax.validation.constraints.NotNull
 
 @RestController
@@ -36,15 +40,15 @@ interface PhoneRepository : JpaRepository<PhoneEntity, Int>
 
 @Entity
 data class PhoneEntity(
-        @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
-        var id: Int? = null,
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    var id: Int? = null,
 
-        @Column(unique = true)
-        @NotNull
-        var phone: String? = null,
+    @Column(unique = true)
+    @NotNull
+    var phone: String? = null,
 
-        @Column
-        @NotNull
-        var name: String? = null
+    @Column
+    @NotNull
+    var name: String? = null
 )
