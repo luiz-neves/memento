@@ -1,0 +1,21 @@
+name: BuildFront
+
+on:
+  pull_request:
+    paths-ignore:
+      - '*.md'
+  push:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - run: npm install --prefix Frontend
+      - run: npm build --if-present --prefix Frontend
+      - run: npm test --prefix Frontend
