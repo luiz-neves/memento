@@ -4,7 +4,8 @@ plugins {
     id("org.springframework.boot") version "2.3.0.RELEASE"
     id("io.spring.dependency-management") version "1.0.9.RELEASE"
     kotlin("jvm") version "1.4.10"
-    kotlin("plugin.spring") version "1.3.72"
+    kotlin("plugin.spring") version "1.4.10"
+    kotlin("plugin.jpa") version "1.4.10"
     id("io.gitlab.arturbosch.detekt") version "1.13.1"
     application
 }
@@ -36,7 +37,8 @@ dependencies {
     runtimeOnly("org.postgresql:postgresql")
 
     // Kotest
-    testImplementation("io.kotest:kotest-runner-junit5:4.2.5")
+    testImplementation("io.kotest:kotest-runner-junit5:4.3.0")
+    testImplementation("io.kotest:kotest-extensions-spring:4.3.0")
     
     // Detekt
     detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.13.1")
