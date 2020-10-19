@@ -3,21 +3,30 @@ import Router from 'vue-router'
 import App from './App.vue'
 import vuetify from './plugins/vuetify';
 import Contact from './components/Contact'
+import Memorial from './components/Memorial'
 Vue.config.productionTip = false
 
 const router = new Router({
+  mode: 'history',
+  baseUrl: '',
   routes: [
     {
-      path: '/contacts',
+      name: 'Contact',
+      path: '/contact',
       component: Contact
-    }
+    },
+    {
+      name: 'Memorial',
+      path: '/',
+      component: Memorial
+    },
   ]
 })
+
+Vue.use(Router)
 
 new Vue({
   vuetify,
   router,
   render: h => h(App)
 }).$mount('#app')
-
-Vue.use(Router)
