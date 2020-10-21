@@ -45,6 +45,10 @@ dependencies {
     
     // Mockk
     testImplementation("io.mockk:mockk:1.10.0")
+
+    // Jackson
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.4.0")
+
 }
 
 tasks.withType<KotlinCompile> {
