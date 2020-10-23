@@ -3,15 +3,24 @@ package com.memento
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.DeleteMapping
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.web.bind.annotation.RestController
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import javax.persistence.*
+import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
+import javax.persistence.Id
 import javax.validation.Valid
 
 @RestController
 class Schedule(
-        private val scheduleRepository: ScheduleRepository
+    private val scheduleRepository: ScheduleRepository
 ) {
 
     @GetMapping("/schedule")
@@ -29,7 +38,14 @@ class Schedule(
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
         val localDateTime = LocalDateTime.parse(date, formatter)
 
-        val schedule = ScheduleEntity(request.personId, request.nameEvent, localDateTime, request.description, request.speaker, null)
+        val schedule = ScheduleEntity(
+            request.personId,
+            request.nameEvent,
+            localDateTime,
+            request.description,
+            request.speaker,
+            null
+        )
         scheduleRepository.save(schedule)
 
         return ResponseEntity(HttpStatus.CREATED)
@@ -48,36 +64,35 @@ interface ScheduleRepository : JpaRepository<ScheduleEntity, Int> {
     fun deleteByPersonId(personId: Int)
 }
 
-
 data class ScheduleRequest(
-        val personId: Int,
+    val personId: Int,
 
-        val nameEvent: String,
+    val nameEvent: String,
 
-        val date: String,
+    val date: String,
 
-        val description: String,
+    val description: String,
 
-        val speaker: String?,
+    val speaker: String?,
 )
 
 @Entity
 data class ScheduleEntity(
-        val personId: Int,
+    val personId: Int,
 
-        @Column
-        val nameEvent: String,
+    @Column
+    val nameEvent: String,
 
-        @Column
-        val date: LocalDateTime,
+    @Column
+    val date: LocalDateTime,
 
-        @Column
-        val description: String,
+    @Column
+    val description: String,
 
-        @Column
-        val speaker: String?,
+    @Column
+    val speaker: String?,
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
-        val id: Int?
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    val id: Int?
 )

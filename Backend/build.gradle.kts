@@ -6,7 +6,7 @@ plugins {
     kotlin("jvm") version "1.4.10"
     kotlin("plugin.spring") version "1.4.10"
     kotlin("plugin.jpa") version "1.4.10"
-    id("io.gitlab.arturbosch.detekt") version "1.13.1"
+    id("io.gitlab.arturbosch.detekt") version "1.14.2"
     application
 }
 
@@ -16,6 +16,11 @@ repositories {
     mavenCentral()
     jcenter()
     maven { url = uri("https://dl.bintray.com/kotlin/kotlinx") }
+    jcenter {
+        content {
+            includeGroup("org.jetbrains.kotlinx")
+        }
+    }
 }
 
 dependencies {
