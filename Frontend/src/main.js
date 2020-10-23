@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import App from './App.vue'
 import vuetify from './plugins/vuetify';
 import Contact from './components/Contact'
+import Agenda from './components/Agenda'
 import Memorial from './components/Memorial'
 Vue.config.productionTip = false
 
@@ -14,6 +15,11 @@ const router = new Router({
       name: 'Contact',
       path: '/contact',
       component: Contact
+    },
+    {
+      name: 'Agenda',
+      path: '/agenda',
+      component: Agenda
     },
     {
       name: 'Memorial',
