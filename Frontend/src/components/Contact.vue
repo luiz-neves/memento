@@ -71,7 +71,7 @@
                 </v-card-actions>
               </v-card>
             </v-dialog>
-          </v-row>
+        </v-row>
         <v-list-item
           v-for="contact in contacts"
           :key="contact.id"

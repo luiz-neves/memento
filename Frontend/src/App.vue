@@ -6,7 +6,7 @@
       right
     >
       <v-list dense>
-        <v-list-item link>
+        <v-list-item link @click="goToPath('/')">
           <v-list-item-action>
             <v-icon>mdi-home</v-icon>
           </v-list-item-action>
@@ -16,25 +16,25 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item link>
+        <v-list-item link @click="goToPath('contact')">
           <v-list-item-action>
             <v-icon>mdi-email</v-icon>
           </v-list-item-action>
-
-          <v-list-item-content>
-            <v-list-item-title>Contatos</v-list-item-title>
-          </v-list-item-content>
+          <v-list-item-title>
+            <v-list-item-content>
+              Contatos
+            </v-list-item-content>
+          </v-list-item-title>
         </v-list-item>
-
-        <v-list-item link>
+        <v-list-item link @click="goToPath('agenda')">
           <v-list-item-action>
-            <v-icon>mdi-plus-circle</v-icon>
+            <v-icon>mdi-calendar</v-icon>
           </v-list-item-action>
-
-          <v-list-item-content>
-            <v-list-item-title>Adicionar tributo</v-list-item-title>
-          </v-list-item-content>
-
+          <v-list-item-title>
+            <v-list-item-content>
+              Agenda
+            </v-list-item-content>
+          </v-list-item-title>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
@@ -66,5 +66,10 @@ export default {
   data: () => ({
     drawer: null,
   }),
+  methods: {
+    goToPath(path) {
+      this.$router.push({ path })
+    },
+  }
 }
 </script>
