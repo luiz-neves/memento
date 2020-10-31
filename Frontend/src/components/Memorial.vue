@@ -105,6 +105,7 @@
         <div>
           <v-img :src="itemTribute.attachmentUrl" aspect-ratio="1.7"></v-img>
           <div class="title mb-2 text-center">{{ itemTribute.name }}</div>
+          <div class="mb-2 text-center">{{ itemTribute.description }}</div>
         </div>
       </v-col>
     </v-row>
