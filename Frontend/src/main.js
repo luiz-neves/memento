@@ -1,10 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import VueYouTubeEmbed from 'vue-youtube-embed'
+
 import App from './App.vue'
 import vuetify from './plugins/vuetify'
 import Contact from './components/Contact'
 import Agenda from './components/Agenda'
 import Memorial from './components/Memorial'
+import Call from './components/Call'
 Vue.config.productionTip = false
 
 const router = new Router({
@@ -22,6 +25,11 @@ const router = new Router({
       component: Agenda
     },
     {
+      name: 'Call',
+      path: '/call',
+      component: Call
+    },
+    {
       name: 'Memorial',
       path: '/',
       component: Memorial
@@ -29,6 +37,7 @@ const router = new Router({
   ]
 })
 
+Vue.use(VueYouTubeEmbed)
 Vue.use(Router)
 
 new Vue({

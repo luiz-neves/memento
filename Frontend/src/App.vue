@@ -36,6 +36,16 @@
             </v-list-item-content>
           </v-list-item-title>
         </v-list-item>
+        <v-list-item link @click="goToPath('call')">
+          <v-list-item-action>
+            <v-icon>mdi-phone</v-icon>
+          </v-list-item-action>
+          <v-list-item-title>
+            <v-list-item-content>
+              Video chamada
+            </v-list-item-content>
+          </v-list-item-title>
+        </v-list-item>
       </v-list>
     </v-navigation-drawer>
     <v-app-bar

@@ -100,25 +100,17 @@
         </v-card>
       </v-dialog>
     </v-row>
-    <v-row justify="space-around">
-      <v-col cols="4" v-for="itemTribute in tributes" :key="itemTribute.id">
-        <div>
-          <youtube v-if="hasYoutube(itemTribute.attachmentUrl)" :video-id="getIdFromUrl(itemTribute.attachmentUrl)" player-width="400" player-height="240"></youtube>
-          <v-img v-else :src="itemTribute.attachmentUrl" aspect-ratio="1.7"></v-img>
-          <div class="title mb-2 text-center">{{ itemTribute.name }}</div>
-          <div class="mb-2 text-center">{{ itemTribute.description }}</div>
-        </div>
-      </v-col>
-    </v-row>
   </v-container>
 </template>
 
 <script>
   import axios from '../axios'
-  import { not, isEmpty, match } from 'ramda'
-
+  var apiKey = '45828062'
+  var sessionId = '2_MX40NTgyODA2Mn5-MTYwNDY5MDQyMDE4N35LQW10a0lCdHJhYjVBQ3QrR00vU3hkVUp-UH4'
+  var token = 'T1==cGFydG5lcl9pZD00NTgyODA2MiZzaWc9MGI5YzJjZjA4NDI3MjNjZWQ2OWEwM2ZhNjY5NjFjZWNmYjdmNGFiZDpzZXNzaW9uX2lkPTJfTVg0ME5UZ3lPREEyTW41LU1UWXdORFk1TURReU1ERTROMzVMUVcxMGEwbENkSEpoWWpWQlEzUXJSMDB2VTNoa1ZVcC1VSDQmY3JlYXRlX3RpbWU9MTYwNDY5MjU1MCZub25jZT0wLjIyNjY4NDcxOTY0NTYzNjk3JnJvbGU9cHVibGlzaGVyJmV4cGlyZV90aW1lPTE2MDQ3Nzg5NTA='
+  
   export default {
-    name: 'Memorial',
+    name: 'Call',
     data: () => ({
       id: null,
       name: null,
@@ -130,17 +122,35 @@
       dialog: false,
       dialogValues: {},
     }),
+    mounted() {
+      // let externalScript = document.createElement('script')
+      // externalScript.setAttribute('src', 'https://static.opentok.com/v2/js/opentok.js')
+      // externalScript.setAttribute('id', 'OT')
+      // document.head.appendChild(externalScript)
+
+      const { OT } = window
+      console.log(OT)
+      var session = OT.initSession(apiKey, sessionId)
+
+      // create publisher
+      let publisher = OT.initPublisher()
+      session.connect(token, function() {
+        session.publish(publisher)
+
+        console.log(session)
+        console.log('session connected')
+      })
+      
+      session.on('streamCreated', function(event) {
+        session.subscribe(event.stream);
+      })
+    },
     created() {
+      console.log('asdasdasd')
       this.fetchPerson()
       this.fetchTribute()
     },
     methods: {
-      hasYoutube(url = '') {
-        return not(isEmpty(match('youtube', url)))
-      },
-      getIdFromUrl(url = '') {
-        return this.$youtube.getIdFromURL(url)
-      },
       async fetchPerson() {
         const { data } = await axios.get('/person/1')
 
