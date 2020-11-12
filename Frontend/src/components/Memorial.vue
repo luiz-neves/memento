@@ -103,7 +103,7 @@
     <v-row justify="space-around">
       <v-col cols="4" v-for="itemTribute in tributes" :key="itemTribute.id">
         <div>
-          <youtube v-if="hasYoutube(itemTribute.attachmentUrl)" :video-id="getIdFromUrl(itemTribute.attachmentUrl)" player-width="400" player-height="240"></youtube>
+          <youtube v-if="hasYoutube(itemTribute.attachmentUrl)" :video-id="getIdFromUrl(itemTribute.attachmentUrl)" player-width="100%" player-height="240"></youtube>
           <v-img v-else :src="itemTribute.attachmentUrl" aspect-ratio="1.7"></v-img>
           <div class="title mb-2 text-center">{{ itemTribute.name }}</div>
           <div class="mb-2 text-center">{{ itemTribute.description }}</div>
