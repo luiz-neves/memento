@@ -9,6 +9,7 @@ import Agenda from './components/Agenda'
 import Memorial from './components/Memorial'
 import Call from './components/Call'
 import Session from './components/Session'
+import Help from './components/Help'
 Vue.config.productionTip = false
 
 const router = new Router({
@@ -39,6 +40,11 @@ const router = new Router({
       name: 'Session',
       path: '/session',
       component: Session
+    },
+    {
+      name: 'Help',
+      path: '/help',
+      component: Help
     },
   ]
 })

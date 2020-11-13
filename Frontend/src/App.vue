@@ -46,6 +46,16 @@
             </v-list-item-content>
           </v-list-item-title>
         </v-list-item>
+        <v-list-item link @click="goToPath('help')">
+          <v-list-item-action>
+            <v-icon>mdi-flower</v-icon>
+          </v-list-item-action>
+          <v-list-item-title>
+            <v-list-item-content>
+              Ajuda
+            </v-list-item-content>
+          </v-list-item-title>
+        </v-list-item>
       </v-list>
     </v-navigation-drawer>
     <v-app-bar
