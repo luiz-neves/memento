@@ -5,6 +5,7 @@ out
 
 Frontend/node_modules
 node_modules
+/Frontend/.env
 
 .DS_Store
 node_modules
