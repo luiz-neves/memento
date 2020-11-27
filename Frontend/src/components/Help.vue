@@ -57,7 +57,7 @@
     </v-row>
     <v-row justify="space-around">
       <v-col cols="4" v-for="itemTribute in tributes" :key="itemTribute.id">
-        <v-card>
+        <v-card height="100%">
           <v-card-text>
             <v-container>
               <youtube v-if="hasYoutube(itemTribute.attachmentUrl)" :video-id="getIdFromUrl(itemTribute.attachmentUrl)" player-width="100%" player-height="240"></youtube>
