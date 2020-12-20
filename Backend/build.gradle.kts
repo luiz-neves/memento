@@ -8,6 +8,7 @@ plugins {
     kotlin("plugin.jpa") version "1.4.10"
     id("io.gitlab.arturbosch.detekt") version "1.14.2"
     application
+    jacoco
 }
 
 group = "com.memento"
@@ -66,8 +67,22 @@ application {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+    finalizedBy(tasks.jacocoTestReport)
 }
 
 detekt {
     autoCorrect = true
 }
+
+jacoco {
+    toolVersion = "0.8.6"
+}
+
+tasks.withType<JacocoReport> {
+    reports {
+        xml.isEnabled = true
+        xml.destination = file("${buildDir}/reports/jacoco/report.xml")
+    }
+}
+
+tasks.jacocoTestReport { dependsOn(tasks.test) }

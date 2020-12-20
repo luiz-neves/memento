@@ -1,0 +1,10 @@
+name: Codecov
+on: [ push ]
+jobs:
+  coverage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Generate coverage report
+        run: cd ./Backend ; ./gradlew jacocoTestReport
+      - uses: codecov/codecov-action@v1
