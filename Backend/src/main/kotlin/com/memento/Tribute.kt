@@ -21,14 +21,14 @@ class TributeController(
 ) {
 
     @GetMapping("/tribute")
-    fun getTributeByPersonId(@RequestParam("personId") personId: Int): ResponseEntity<List<TributeEntity>> {
+    fun getByPersonId(@RequestParam("personId") personId: Int): ResponseEntity<List<TributeEntity>> {
         val tributes = tributeRepository.findByPersonId(personId)
 
         return ResponseEntity(tributes, HttpStatus.OK)
     }
 
     @PostMapping("/tribute")
-    fun saveTribute(@RequestBody @Valid tribute: TributeEntity): ResponseEntity<TributeEntity> {
+    fun save(@RequestBody @Valid tribute: TributeEntity): ResponseEntity<TributeEntity> {
         tributeRepository.save(tribute)
 
         return ResponseEntity(HttpStatus.CREATED)
@@ -39,7 +39,7 @@ interface TributeRepository : JpaRepository<TributeEntity, Int> {
     fun findByPersonId(personId: Int): List<TributeEntity>
 }
 
-@Entity
+@Entity(name = "tribute")
 data class TributeEntity(
     @Column
     val personId: Int,

@@ -18,26 +18,26 @@ class PhoneController(
     private val phoneRepository: PhoneRepository
 ) {
 
-    @PostMapping("/insertPhone")
-    fun postInsertPhone(
-        @RequestBody phoneEntity: PhoneEntity
+    @PostMapping("/phone")
+    fun save(
+        @RequestBody phone: PhoneEntity
     ): ResponseEntity<PhoneEntity> {
-        phoneRepository.save(phoneEntity)
+        phoneRepository.save(phone)
 
         return ResponseEntity(HttpStatus.CREATED)
     }
 
-    @GetMapping("/findAllPhones")
+    @GetMapping("/phone")
     fun findAll(): ResponseEntity<List<PhoneEntity>> {
-        val person = phoneRepository.findAll()
+        val phone = phoneRepository.findAll()
 
-        return ResponseEntity(person, HttpStatus.OK)
+        return ResponseEntity(phone, HttpStatus.OK)
     }
 }
 
 interface PhoneRepository : JpaRepository<PhoneEntity, Int>
 
-@Entity
+@Entity(name = "phone")
 data class PhoneEntity(
     @Column(unique = true)
     val phone: String,

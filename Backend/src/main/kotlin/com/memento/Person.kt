@@ -17,7 +17,7 @@ class PersonController(
     private val personRepository: PersonRepository
 ) {
     @GetMapping("/person/{id}")
-    fun getByPersonId(@PathVariable id: Int): ResponseEntity<PersonEntity> {
+    fun getById(@PathVariable id: Int): ResponseEntity<PersonEntity> {
         val person = personRepository.findById(id)
 
         if (!person.isPresent) return ResponseEntity.notFound().build()
@@ -27,7 +27,7 @@ class PersonController(
 
 interface PersonRepository : JpaRepository<PersonEntity, Int>
 
-@Entity
+@Entity(name = "person")
 data class PersonEntity(
     @Column(unique = true)
     val birthDate: String,

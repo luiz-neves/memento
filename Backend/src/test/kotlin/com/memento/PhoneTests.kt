@@ -25,7 +25,7 @@ class PhoneTests : FunSpec({
     test("Saves what is passed through the API") {
         every { repository.save(any()) } answers { firstArg() }
 
-        target.postInsertPhone(dummyPhone).statusCode shouldBe HttpStatus.CREATED
+        target.save(dummyPhone).statusCode shouldBe HttpStatus.CREATED
         verify(exactly = 1) { repository.save(any()) }
     }
 })
