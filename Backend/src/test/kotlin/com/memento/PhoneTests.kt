@@ -1,5 +1,8 @@
 package com.memento
 
+import com.memento.phone.PhoneController
+import com.memento.phone.PhoneEntity
+import com.memento.phone.PhoneRepository
 import io.kotest.assertions.assertSoftly
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe

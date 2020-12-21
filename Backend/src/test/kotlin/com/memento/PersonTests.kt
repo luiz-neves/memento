@@ -1,5 +1,8 @@
 package com.memento
 
+import com.memento.person.PersonController
+import com.memento.person.PersonEntity
+import com.memento.person.PersonRepository
 import io.kotest.assertions.assertSoftly
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe

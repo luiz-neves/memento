@@ -1,5 +1,8 @@
 package com.memento
 
+import com.memento.tribute.TributeController
+import com.memento.tribute.TributeEntity
+import com.memento.tribute.TributeRepository
 import io.kotest.assertions.assertSoftly
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
@@ -12,7 +15,7 @@ class TributeTests : FunSpec({
     
     val repository: TributeRepository = mockk()
     val target = TributeController(repository)
-    
+
     test("Returns what repository returns") {
         every { repository.findByPersonId(1) } returns listOf(dummyTribute)
         
