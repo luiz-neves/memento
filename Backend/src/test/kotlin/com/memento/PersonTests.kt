@@ -16,7 +16,7 @@ class PersonTests : FunSpec({
     test("Returns what repository returns") {
         every { repository.findById(1) } returns Optional.of(dummyPerson)
 
-        assertSoftly(target.getByPersonId(1)) {
+        assertSoftly(target.getById(1)) {
             body shouldBe dummyPerson
             statusCode shouldBe HttpStatus.OK
         }
@@ -25,7 +25,7 @@ class PersonTests : FunSpec({
     test("Return not found for a not found person") {
         every { repository.findById(1) } returns Optional.empty()
 
-        assertSoftly(target.getByPersonId(1)) {
+        assertSoftly(target.getById(1)) {
             statusCode shouldBe HttpStatus.NOT_FOUND
         }
     }

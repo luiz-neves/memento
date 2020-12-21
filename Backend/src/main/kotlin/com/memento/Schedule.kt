@@ -19,29 +19,27 @@ import javax.persistence.Id
 import javax.validation.Valid
 
 @RestController
-class Schedule(
+class ScheduleController(
     private val scheduleRepository: ScheduleRepository
 ) {
 
     @GetMapping("/schedule")
-    fun getScheduleByPersonId(@RequestParam("personId") personId: Int): ResponseEntity<List<ScheduleEntity>> {
+    fun getByPersonId(@RequestParam("personId") personId: Int): ResponseEntity<List<ScheduleEntity>> {
         val schedules = scheduleRepository.findByPersonId(personId)
 
-        val sortedSchedulesByDate = schedules.sortedBy { entity -> entity.date }
-        return ResponseEntity(sortedSchedulesByDate, HttpStatus.OK)
+        val schedulesSortedByDate = schedules.sortedBy { it.date }
+        return ResponseEntity(schedulesSortedByDate, HttpStatus.OK)
     }
 
     @PostMapping("/schedule")
-    fun saveSchedule(@RequestBody @Valid request: ScheduleRequest): ResponseEntity<TributeEntity> {
-        val date = request.date
-
-        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
-        val localDateTime = LocalDateTime.parse(date, formatter)
+    fun save(@RequestBody @Valid request: ScheduleRequest): ResponseEntity<TributeEntity> {
+        val dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+        val dateFormatted = LocalDateTime.parse(request.date, dateTimeFormatter)
 
         val schedule = ScheduleEntity(
             request.personId,
             request.nameEvent,
-            localDateTime,
+            dateFormatted,
             request.description,
             request.speaker,
             null
@@ -52,7 +50,7 @@ class Schedule(
     }
 
     @DeleteMapping("/schedule")
-    fun deleteSchedule(@RequestParam("personId") personId: Int): ResponseEntity<TributeEntity> {
+    fun deleteByPersonId(@RequestParam("personId") personId: Int): ResponseEntity<TributeEntity> {
         scheduleRepository.deleteByPersonId(personId)
 
         return ResponseEntity(HttpStatus.OK)
@@ -76,7 +74,7 @@ data class ScheduleRequest(
     val speaker: String?,
 )
 
-@Entity
+@Entity(name = "schedule")
 data class ScheduleEntity(
     val personId: Int,
 

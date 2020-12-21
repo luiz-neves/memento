@@ -16,7 +16,7 @@ class TributeTests : FunSpec({
     test("Returns what repository returns") {
         every { repository.findByPersonId(1) } returns listOf(dummyTribute)
         
-        assertSoftly(target.getTributeByPersonId(1)) {
+        assertSoftly(target.getByPersonId(1)) {
             body shouldBe listOf(dummyTribute)
             statusCode shouldBe HttpStatus.OK
         }
@@ -25,7 +25,7 @@ class TributeTests : FunSpec({
     test("Saves what is passed through the API") {
         every { repository.save(any()) } answers { firstArg() }
         
-        target.saveTribute(dummyTribute).statusCode shouldBe HttpStatus.CREATED
+        target.save(dummyTribute).statusCode shouldBe HttpStatus.CREATED
         verify(exactly = 1) { repository.save(any()) }
     }
 })
