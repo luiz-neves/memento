@@ -1,6 +1,5 @@
-package com.memento
+package com.memento.schedule
 
-import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
@@ -11,11 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
 import javax.validation.Valid
 
 @RestController
@@ -32,7 +26,7 @@ class ScheduleController(
     }
 
     @PostMapping("/schedule")
-    fun save(@RequestBody @Valid request: ScheduleRequest): ResponseEntity<TributeEntity> {
+    fun save(@RequestBody @Valid request: ScheduleRequest): ResponseEntity<ScheduleEntity> {
         val dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
         val dateFormatted = LocalDateTime.parse(request.date, dateTimeFormatter)
 
@@ -50,16 +44,11 @@ class ScheduleController(
     }
 
     @DeleteMapping("/schedule")
-    fun deleteByPersonId(@RequestParam("personId") personId: Int): ResponseEntity<TributeEntity> {
+    fun deleteByPersonId(@RequestParam("personId") personId: Int): ResponseEntity<ScheduleEntity> {
         scheduleRepository.deleteByPersonId(personId)
 
         return ResponseEntity(HttpStatus.OK)
     }
-}
-
-interface ScheduleRepository : JpaRepository<ScheduleEntity, Int> {
-    fun findByPersonId(personId: Int): List<ScheduleEntity>
-    fun deleteByPersonId(personId: Int)
 }
 
 data class ScheduleRequest(
@@ -72,25 +61,4 @@ data class ScheduleRequest(
     val description: String,
 
     val speaker: String?,
-)
-
-@Entity(name = "schedule")
-data class ScheduleEntity(
-    val personId: Int,
-
-    @Column
-    val nameEvent: String,
-
-    @Column
-    val date: LocalDateTime,
-
-    @Column
-    val description: String,
-
-    @Column
-    val speaker: String?,
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    val id: Int?
 )
