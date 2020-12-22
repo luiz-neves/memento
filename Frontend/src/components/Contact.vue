@@ -103,11 +103,11 @@
     },
     methods: {
       async fetchContact() {
-        const { data } = await axios.get('/findAllPhones')
+        const { data } = await axios.get('/phone')
         this.contacts = data
       },
       async saveContact() {
-        await axios.post('/insertPhone', this.dialogContactValues)
+        await axios.post('/phone', this.dialogContactValues)
 
         this.dialogContact = false
         this.fetchContact()
